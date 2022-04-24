@@ -2,8 +2,10 @@ package com.reservation.reservationsystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class ReservationSystemApplication {
 
 	public static void main(String[] args) {
