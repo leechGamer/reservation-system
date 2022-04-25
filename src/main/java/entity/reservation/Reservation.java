@@ -17,7 +17,7 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @Getter
 @Builder
-@Table(name = "reservations")
+@Table(name = "reservation")
 public class Reservation extends Audit {
 
     @Id
