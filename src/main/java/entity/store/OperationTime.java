@@ -32,10 +32,10 @@ public class OperationTime extends Audit{
     @Column(nullable = false, name = "end_date")
     private LocalDateTime endDate;
 
-    @Column(nullable = false, name = "break_start_time")
+    @Column(name = "break_start_time")
     private LocalDateTime breakStartTime;
 
-    @Column(nullable = false, name = "break_end_time")
+    @Column(name = "break_end_time")
     private LocalDateTime breakEndTime;
 
 
