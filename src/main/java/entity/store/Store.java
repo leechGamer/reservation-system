@@ -19,7 +19,7 @@ import javax.persistence.*;
 @Table(name = "store")
 public class Store extends Audit {
 
-    @Id
+    @Id @GeneratedValue
     private Long id;
 
     @Setter
@@ -27,7 +27,7 @@ public class Store extends Audit {
     private String name;
 
     @ManyToOne(targetEntity = Company.class)
-    @JoinColumn(nullable = false, name = "companyId")
+    @JoinColumn(nullable = false, name = "company_id")
     private Company company;
 
     @Setter
@@ -48,10 +48,11 @@ public class Store extends Audit {
     @Column(nullable = false)
     private Location location;
 
-    @Column(nullable = false)
-    private String phonenumber;
+    @Setter
+    @Column(nullable = false, name="phone_number")
+    private String phoneNumber;
 
-    //createdAt, updatedAt Audit에서 가져옴
+
 
     @Builder
     public Store of (
