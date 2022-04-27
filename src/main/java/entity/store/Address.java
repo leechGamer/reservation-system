@@ -15,9 +15,12 @@ public class Address {
     @Column(nullable = false, name = "address")
     private String address;
 
-    @Column(nullable = false, name = "zipcode")
+    @Column(nullable = false, name = "zip_code")
     private String zipcode;
 
+    public void setAddress(String address, String zip_code){
+        this.address =
+    }
     public Address of (
             String address,
             String zipcode
