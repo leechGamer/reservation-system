@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,34 +17,45 @@ import java.util.Date;
 @Table(name = "OperationTime")
 public class OperationTime extends Audit{
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "day_of_week")
+    private String dayOfWeek;
+
+    @Column(nullable = false, name = "store_id")
     private Long storeId;
 
-    @Setter
-    @Column(nullable = false)
-    private Date startDate;
+    @Column(nullable = false, name = "start_date")
+    private LocalDateTime startDate;
 
-    @Setter
-    @Column(nullable = false)
-    private Date endDate;
+    @Column(nullable = false, name = "end_date")
+    private LocalDateTime endDate;
 
-    @Setter
-    @Column(nullable = false)
-    private Date breakStartTime;
+    @Column(nullable = false, name = "break_start_time")
+    private LocalDateTime breakStartTime;
 
-    @Setter
-    @Column(nullable = false)
-    private Date breakEndTime;
+    @Column(nullable = false, name = "break_end_time")
+    private LocalDateTime breakEndTime;
+
+
+    // 요일 별 영업타임 브레이크타임 변경
+    public void setBizTime(String dayOfWeek, LocalDateTime startDate, LocalDateTime endDate){
+        this.dayOfWeek = dayOfWeek;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+    public void setBreakTime(String dayOfWeek, LocalDateTime breakStartTime, LocalDateTime breakEndTime){
+        this.dayOfWeek = dayOfWeek;
+        this.breakStartTime = breakStartTime;
+        this.breakEndTime = breakEndTime;
+    }
 
     public OperationTime of (
-            Date startDate,
-            Date endDate,
-            Date breakStartTime,
-            Date breakEndTime
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            LocalDateTime breakStartTime,
+            LocalDateTime breakEndTime
     ){
         return builder()
                 .startDate(startDate)

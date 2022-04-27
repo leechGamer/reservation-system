@@ -1,7 +1,11 @@
-package entity;
+package entity.store;
 
-
-import Constant.StoreCategory;
+import entity.*;
+import entity.Address;
+import entity.Company;
+import entity.Location;
+import entity.OperationTime;
+import entity.StoreCategory;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Table(name = "store")
-public class Store extends Audit{
+public class Store extends Audit {
 
     @Id
     private Long id;
@@ -24,7 +28,7 @@ public class Store extends Audit{
 
     @ManyToOne(targetEntity = Company.class)
     @JoinColumn(nullable = false, name = "companyId")
-    private Company company; //com
+    private Company company;
 
     @Setter
     @Enumerated(EnumType.STRING)
@@ -45,7 +49,7 @@ public class Store extends Audit{
     private Location location;
 
     @Column(nullable = false)
-    private String phoneNumber;
+    private String phonenumber;
 
     //createdAt, updatedAt Audit에서 가져옴
 
