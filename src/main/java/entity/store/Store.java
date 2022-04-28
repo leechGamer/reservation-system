@@ -1,18 +1,17 @@
 package entity.store;
 
 import entity.*;
-import entity.Location;
 import entity.company.Company;
 import entity.contstants.StoreCategory;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Table(name = "store")
 public class Store extends Audit {
@@ -46,6 +45,11 @@ public class Store extends Audit {
     @Setter
     @Column(nullable = false, name="phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "OperationTime")
+    private List<OperationTime> operationTimes = new ArrayList<>();
+
+    public Store() {}
 
     @Builder
     public Store of (
