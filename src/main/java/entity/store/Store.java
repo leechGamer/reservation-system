@@ -2,8 +2,8 @@ package entity.store;
 
 import entity.*;
 import entity.Location;
-import entity.StoreCategory;
 import entity.company.Company;
+import entity.contstants.StoreCategory;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

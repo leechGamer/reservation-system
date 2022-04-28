@@ -20,16 +20,6 @@ public class Location {
     @Column(name = "longitude", nullable = false)
     private double longitude;
 
-    public Location(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public void setLocation (double latitude, double longitude){
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
     public Location of (
             Double latitude,
             Double longitude

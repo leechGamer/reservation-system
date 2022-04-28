@@ -18,16 +18,6 @@ public class Address {
     @Column(nullable = false, name = "zip_code")
     private String zipcode;
 
-    public Address(String address, String zipcode){
-        this.address = address;
-        this.zipcode = zipcode;
-    }
-
-    public void setAddress(String address, String zipcode){
-        this.address = address;
-        this.zipcode = zipcode;
-    }
-
     public Address of (
             String address,
             String zipcode
