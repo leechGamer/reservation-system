@@ -1,10 +1,10 @@
 package entity.store;
 
 import entity.*;
-import entity.Company;
 import entity.Location;
 import entity.OperationTime;
 import entity.StoreCategory;
+import entity.company.Company;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

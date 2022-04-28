@@ -17,7 +17,7 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @Getter
 @Builder
-@Table(name = "reservations")
+@Table(name = "reservation")
 public class Reservation extends Audit {
 
     @Id
@@ -54,11 +54,15 @@ public class Reservation extends Audit {
     @Column(nullable = false)
     private int numberOfCustomer = 1 ;
 
+    @OneToOne
+    @JoinColumn(name = "review_id", nullable = true)
+    private Review review;
+
     @Tolerate
     public Reservation() {}
 
     public static Reservation of(
-            long customerId,
+            Customer customer,
             ReservationStatus reservationStatus,
             long amount,
             PaymentType paymentType,
@@ -68,6 +72,7 @@ public class Reservation extends Audit {
             int numberOfCustomer
     ) {
         return builder()
+                .customer(customer)
                 .reservationStatus(reservationStatus)
                 .amount(amount)
                 .paymentType(paymentType)

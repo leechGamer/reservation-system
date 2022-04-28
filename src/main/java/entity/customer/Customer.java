@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
-@Table(name = "customers")
+@Table(name = "customer")
 public class Customer extends Audit {
     @Id
     @GeneratedValue
