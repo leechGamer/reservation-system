@@ -1,5 +1,7 @@
 package entity.reservation;
 
+import entity.menu.Menu;
+
 import javax.persistence.*;
 
 @Entity
