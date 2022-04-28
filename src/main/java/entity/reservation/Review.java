@@ -22,11 +22,11 @@ public class Review extends Audit {
     private Long id;
 
     @Column(nullable = true)
-    String comment;
+    private String comment;
 
     @Enumerated(STRING)
     @Column(nullable = false)
-    ScoreType score;
+    private ScoreType score;
 
     @Tolerate
     public Review() {}
