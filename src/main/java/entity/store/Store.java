@@ -2,7 +2,6 @@ package entity.store;
 
 import entity.*;
 import entity.Location;
-import entity.OperationTime;
 import entity.StoreCategory;
 import entity.company.Company;
 import lombok.Builder;

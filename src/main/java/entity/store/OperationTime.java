@@ -1,5 +1,6 @@
-package entity;
+package entity.store;
 
+import entity.Audit;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Date;
 @Getter
 @Builder
 @Table(name = "OperationTime")
-public class OperationTime extends Audit{
+public class OperationTime extends Audit {
 
     @Id @GeneratedValue
     private Long id;
@@ -26,11 +27,11 @@ public class OperationTime extends Audit{
     @Column(nullable = false, name = "store_id")
     private Long storeId;
 
-    @Column(nullable = false, name = "start_date")
-    private LocalDateTime startDate;
+    @Column(nullable = false, name = "start_time")
+    private LocalDateTime startTime;
 
-    @Column(nullable = false, name = "end_date")
-    private LocalDateTime endDate;
+    @Column(nullable = false, name = "end_time")
+    private LocalDateTime endTime;
 
     @Column(name = "break_start_time")
     private LocalDateTime breakStartTime;
@@ -42,8 +43,8 @@ public class OperationTime extends Audit{
     // 요일 별 영업타임 브레이크타임 변경
     public void setBizTime(String dayOfWeek, LocalDateTime startDate, LocalDateTime endDate){
         this.dayOfWeek = dayOfWeek;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startTime = startDate;
+        this.endTime = endDate;
     }
     public void setBreakTime(String dayOfWeek, LocalDateTime breakStartTime, LocalDateTime breakEndTime){
         this.dayOfWeek = dayOfWeek;
@@ -52,14 +53,14 @@ public class OperationTime extends Audit{
     }
 
     public OperationTime of (
-            LocalDateTime startDate,
-            LocalDateTime endDate,
+            LocalDateTime startTime,
+            LocalDateTime endTime,
             LocalDateTime breakStartTime,
             LocalDateTime breakEndTime
     ){
         return builder()
-                .startDate(startDate)
-                .endDate(endDate)
+                .startTime(startTime)
+                .endTime(endTime)
                 .breakStartTime(breakStartTime)
                 .breakEndTime(breakEndTime)
                 .build();
