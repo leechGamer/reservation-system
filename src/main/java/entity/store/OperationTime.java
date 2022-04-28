@@ -3,19 +3,12 @@ package entity.store;
 import entity.Audit;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-@NoArgsConstructor
 @Getter
-@Builder
-@Table(name = "OperationTime")
+@Table(name = "operation_time")
 public class OperationTime extends Audit {
 
     @Id @GeneratedValue
@@ -39,19 +32,9 @@ public class OperationTime extends Audit {
     @Column(name = "break_end_time")
     private LocalDateTime breakEndTime;
 
+    public OperationTime() {}
 
-    // 요일 별 영업타임 브레이크타임 변경
-    public void setBizTime(String dayOfWeek, LocalDateTime startDate, LocalDateTime endDate){
-        this.dayOfWeek = dayOfWeek;
-        this.startTime = startDate;
-        this.endTime = endDate;
-    }
-    public void setBreakTime(String dayOfWeek, LocalDateTime breakStartTime, LocalDateTime breakEndTime){
-        this.dayOfWeek = dayOfWeek;
-        this.breakStartTime = breakStartTime;
-        this.breakEndTime = breakEndTime;
-    }
-
+    @Builder
     public OperationTime of (
             LocalDateTime startTime,
             LocalDateTime endTime,
