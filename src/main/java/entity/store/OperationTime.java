@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class OperationTime extends Audit {
 
     @Id @GeneratedValue
+    @Column(nullable = false, name = "operation_time_id")
     private Long id;
 
     @Column(nullable = false, name = "day_of_week")
