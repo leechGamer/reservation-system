@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
-@Table(name = "menus")
+@Table(name = "menu")
 public class Menu extends Audit {
 
     @Id

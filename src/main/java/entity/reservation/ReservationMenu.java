@@ -5,6 +5,7 @@ import entity.menu.Menu;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "reservation_menu")
 public class ReservationMenu {
 
     @Id
