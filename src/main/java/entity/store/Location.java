@@ -2,6 +2,8 @@ package entity.store;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.Tolerate;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -16,6 +18,7 @@ public class Location {
     @Column(name = "longitude", nullable = false)
     private double longitude;
 
+    @Tolerate
     public Location(){}
 
     public Location of (

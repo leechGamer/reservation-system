@@ -46,7 +46,8 @@ public class Store extends Audit {
     @Column(nullable = false, name="phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "OperationTime")
+    @OneToMany
+    @JoinColumn(name = "operation_time_id")
     private List<OperationTime> operationTimes = new ArrayList<>();
 
     public Store() {}
