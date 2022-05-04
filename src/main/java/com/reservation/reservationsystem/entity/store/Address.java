@@ -1,4 +1,4 @@
-package entity.store;
+package com.reservation.reservationsystem.entity.store;
 
 import lombok.Builder;
 import lombok.Getter;

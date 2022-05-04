@@ -1,6 +1,6 @@
-package entity.reservation;
+package com.reservation.reservationsystem.entity.reservation;
 
-import entity.menu.Menu;
+import com.reservation.reservationsystem.entity.menu.Menu;
 
 import javax.persistence.*;
 

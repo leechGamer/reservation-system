@@ -1,4 +1,4 @@
-package entity;
+package com.reservation.reservationsystem.entity;
 
 import lombok.Getter;
 import lombok.Setter;

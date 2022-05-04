@@ -1,7 +1,7 @@
-package entity.menu;
+package com.reservation.reservationsystem.entity.menu;
 
-import entity.Audit;
-import entity.contstants.CategoryType;
+import com.reservation.reservationsystem.entity.Audit;
+import com.reservation.reservationsystem.entity.contstants.CategoryType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
