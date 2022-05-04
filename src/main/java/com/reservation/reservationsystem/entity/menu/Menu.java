@@ -1,5 +1,6 @@
 package com.reservation.reservationsystem.entity.menu;
 
+import com.reservation.reservationsystem.dto.menu.MenuSaveRequestDTO;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.contstants.CategoryType;
 import lombok.Builder;
@@ -10,8 +11,8 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
 @Table(name = "menu")
+@Builder
 public class Menu extends Audit {
 
     @Id
@@ -19,13 +20,13 @@ public class Menu extends Audit {
     @Column(name = "menu_id")
     private Long id;
 
-    // Todo:: storeId 추가
-
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = true)
     private CategoryType category;
 
+    @Column(nullable = true)
     private String description;
 
     @Column(nullable = false)
