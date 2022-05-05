@@ -1,6 +1,6 @@
-package entity.store;
+package com.reservation.reservationsystem.entity.store;
 
-import entity.Audit;
+import com.reservation.reservationsystem.entity.Audit;
 import lombok.Builder;
 import lombok.Getter;
 import javax.persistence.*;

@@ -1,9 +1,9 @@
-package entity.reservation;
+package com.reservation.reservationsystem.entity.reservation;
 
-import entity.Audit;
-import entity.contstants.PaymentType;
-import entity.contstants.ReservationStatus;
-import entity.customer.Customer;
+import com.reservation.reservationsystem.entity.Audit;
+import com.reservation.reservationsystem.entity.contstants.PaymentType;
+import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
+import com.reservation.reservationsystem.entity.customer.Customer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@EntityScan(basePackages = {"entity"})
+@EntityScan(basePackages = {"com/reservation/reservationsystem/entity"})
 public class ReservationSystemApplication {
 
 	public static void main(String[] args) {

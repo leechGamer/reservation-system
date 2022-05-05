@@ -1,7 +1,7 @@
-package entity.customer;
+package com.reservation.reservationsystem.entity.customer;
 
-import entity.Audit;
-import entity.reservation.Reservation;
+import com.reservation.reservationsystem.entity.Audit;
+import com.reservation.reservationsystem.entity.reservation.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.Tolerate;

@@ -30,3 +30,7 @@ rebel.xml
 .gradle
 /build/
 .gradletasknamecache
+
+# Intelli J
+application-dev.properties
+application-local.properties
