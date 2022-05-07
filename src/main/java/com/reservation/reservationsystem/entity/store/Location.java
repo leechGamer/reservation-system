@@ -21,7 +21,7 @@ public class Location {
     @Tolerate
     public Location(){}
 
-    public Location of (
+    public static Location of (
             Double latitude,
             Double longitude
     ){
