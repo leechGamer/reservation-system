@@ -1,4 +1,4 @@
-package com.reservation.reservationsystem.repository;
+package com.reservation.reservationsystem.repository.menu;
 
 import com.reservation.reservationsystem.entity.menu.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;

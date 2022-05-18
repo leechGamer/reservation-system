@@ -34,3 +34,5 @@ rebel.xml
 # Intelli J
 application-dev.properties
 application-local.properties
+
+src/main/generated
