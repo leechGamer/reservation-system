@@ -1,6 +1,5 @@
 package com.reservation.reservationsystem.entity.menu;
 
-import com.reservation.reservationsystem.dto.menu.MenuSaveRequestDTO;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.contstants.CategoryType;
 import lombok.Builder;

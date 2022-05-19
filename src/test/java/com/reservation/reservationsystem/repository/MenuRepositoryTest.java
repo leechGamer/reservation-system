@@ -6,6 +6,7 @@ import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.store.Address;
 import com.reservation.reservationsystem.entity.store.Location;
 import com.reservation.reservationsystem.entity.store.Store;
+import com.reservation.reservationsystem.repository.menu.MenuRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
