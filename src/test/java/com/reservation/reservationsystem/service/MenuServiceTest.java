@@ -1,5 +1,6 @@
 package com.reservation.reservationsystem.service;
 
+import com.reservation.reservationsystem.config.QuerydslConfiguration;
 import com.reservation.reservationsystem.dto.menu.MenuSaveRequestDTO;
 import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.StoreCategory;
@@ -14,13 +15,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -30,9 +34,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ActiveProfiles("local")
-@ExtendWith(SpringExtension.class)
-@ExtendWith(MockitoExtension.class)
+@RunWith(MockitoJUnitRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(QuerydslConfiguration.class)
 @DataJpaTest
 class MenuServiceTest {
 
@@ -72,8 +76,8 @@ class MenuServiceTest {
                 address,
                 phoneNumber
         );
-        entityManager.persist(store);
         company.addStore(store);
+        entityManager.persist(company);
 
         Menu menu = Menu.of(
                 "메뉴1",
