@@ -1,6 +1,6 @@
 package com.reservation.reservationsystem.entity.contstants;
 
-public enum PaymentType {
+public enum PaymentStatus {
     // todo :: 결제 상태 추가
-    NONE, CASH
+    READY, COMPLETED, CANCELED, REFUND
 }
