@@ -1,4 +1,4 @@
-package com.reservation.reservationsystem.service;
+package com.reservation.reservationsystem.service.menu;
 
 import com.reservation.reservationsystem.config.QuerydslConfiguration;
 import com.reservation.reservationsystem.dto.menu.MenuSaveRequestDTO;
@@ -10,23 +10,21 @@ import com.reservation.reservationsystem.entity.store.Location;
 import com.reservation.reservationsystem.entity.store.Store;
 import com.reservation.reservationsystem.repository.menu.MenuRepository;
 import com.reservation.reservationsystem.repository.store.StoreRepository;
+import com.reservation.reservationsystem.service.MenuService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 

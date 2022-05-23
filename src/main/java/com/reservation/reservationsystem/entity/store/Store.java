@@ -1,16 +1,15 @@
 package com.reservation.reservationsystem.entity.store;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.StoreCategory;
+import com.reservation.reservationsystem.entity.reservation.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,15 +24,16 @@ import java.util.Set;
 public class Store extends Audit {
 
     @Id @GeneratedValue
+    @Column(name = "store_id")
     private Long id;
 
     @Setter
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(targetEntity = Company.class)
+    @ManyToOne(targetEntity = Company.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = false, name = "company_id")
-    private Company company; //com
+    private Company company;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -92,5 +92,12 @@ public class Store extends Audit {
             this.menus = new HashSet<>();
         }
         this.menus.add(menu);
+    }
+
+    public void setCompany(Company company) {
+        if (company == null) {
+            throw new EntityExistsException();
+        }
+        this.company = company;
     }
 }
