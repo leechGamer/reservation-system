@@ -56,5 +56,6 @@ public class Company extends Audit {
             this.stores = new HashSet<>();
         }
         this.stores.add(store);
+        store.setCompany(this);
     }
 }
