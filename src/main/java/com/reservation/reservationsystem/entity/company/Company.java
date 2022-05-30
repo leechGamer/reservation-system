@@ -1,5 +1,7 @@
 package com.reservation.reservationsystem.entity.company;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.store.Store;
 import lombok.Builder;
@@ -13,6 +15,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Table(name = "company")
 public class Company extends Audit {
     @Id
