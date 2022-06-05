@@ -8,13 +8,11 @@ import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.store.Address;
 import com.reservation.reservationsystem.entity.store.Location;
 import com.reservation.reservationsystem.entity.store.Store;
+import com.reservation.reservationsystem.exception.DuplicateEntityException;
 import com.reservation.reservationsystem.repository.menu.MenuRepository;
 import com.reservation.reservationsystem.repository.store.StoreRepository;
 import com.reservation.reservationsystem.service.MenuService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -50,23 +48,27 @@ class MenuServiceTest {
     @Mock
     private StoreRepository storeRepository;
 
-    @BeforeEach
-    public void init () {
+    private Store store;
 
-    }
-    @Test
-    @DisplayName("menu를 등록 - success")
-    public void test() {
-        // Given
+    private Company company;
+
+    private Menu menu;
+
+    private Menu menu2;
+
+    private MenuSaveRequestDTO menuDto;
+
+    @BeforeEach
+    public void setUp () {
         String businessNumber = "1234555545";
         String name = "companyName";
         String companyPhoneNumber = "01099999999";
-        Company company = Company.of(businessNumber, name, companyPhoneNumber);
+        company = Company.of(businessNumber, name, companyPhoneNumber);
 
         Location location = Location.of(12.234, 34.333);
         Address address = Address.of("서울시", "123-222");
         String phoneNumber = "01012341234";
-        Store store = Store.of(
+        store = Store.of(
                 "store1",
                 StoreCategory.RESTAURANT,
                 "description",
@@ -75,16 +77,34 @@ class MenuServiceTest {
                 phoneNumber
         );
         company.addStore(store);
+        entityManager.persist(store);
         entityManager.persist(company);
 
-        Menu menu = Menu.of(
+        menu = Menu.of(
                 "메뉴1",
                 null,
                 "메뉴 설명",
                 20000L
         );
-        store.addMenu(menu);
 
+        menuDto = new MenuSaveRequestDTO(
+                menu.getName(),
+                menu.getAmount(),
+                menu.getCategory(),
+                menu.getDescription()
+        );
+        menu2 = Menu.of(
+                "메뉴1",
+                null,
+                "메뉴 설명",
+                20000L
+        );
+    }
+
+    @Test
+    @DisplayName("menu를 등록 - success")
+    public void test() {
+        // Given
         MenuSaveRequestDTO menuDto = new MenuSaveRequestDTO(
                 menu.getName(),
                 menu.getAmount(),
@@ -122,6 +142,25 @@ class MenuServiceTest {
         // When & Then
         Assertions.assertThrows(NullPointerException.class, () -> {
             menuService.save(10L, menuDto);
+        });
+    }
+
+    @Test
+    @DisplayName("중복된 메뉴는 추가할 수 없다.")
+    public void testWithDuplicate() {
+        // Given
+        store.addMenu(menu);
+        MenuSaveRequestDTO menuDto2 =  new MenuSaveRequestDTO(
+                menu2.getName(),
+                menu2.getAmount(),
+                menu2.getCategory(),
+                menu2.getDescription()
+        );
+        given(storeRepository.findById(store.getId())).willReturn(Optional.of(store));
+
+        // When & Then
+        Assertions.assertThrows(DuplicateEntityException.class, () -> {
+            menuService.save(store.getId(), menuDto2);
         });
     }
 }

@@ -6,6 +6,8 @@ import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.StoreCategory;
+import com.reservation.reservationsystem.exception.DuplicateEntityException;
+import com.reservation.reservationsystem.exception.ErrorCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -94,6 +96,9 @@ public class Store extends Audit {
         }
 
         menu.setStore(this);
+        if (menus.contains(menu)) {
+            throw new DuplicateEntityException(ErrorCode.DUPLICATE_ENTITY);
+        }
         this.menus.add(menu);
     }
 
