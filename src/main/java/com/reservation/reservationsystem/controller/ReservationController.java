@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.reservation.reservationsystem.exception.ErrorCode;
-import com.reservation.reservationsystem.exception.ReservationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;

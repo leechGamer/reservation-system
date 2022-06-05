@@ -1,15 +1,17 @@
 package com.reservation.reservationsystem.entity.store;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.StoreCategory;
-import com.reservation.reservationsystem.entity.reservation.Reservation;
+import com.reservation.reservationsystem.exception.DuplicateEntityException;
+import com.reservation.reservationsystem.exception.ErrorCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Table(name = "store")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Builder
 public class Store extends Audit {
 
@@ -58,7 +61,7 @@ public class Store extends Audit {
     @JoinColumn(name = "operation_time_id")
     private List<OperationTime> operationTimes = new ArrayList<>();
 
-    @OneToMany(cascade =CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "menu_id")
     private Set<Menu> menus = new HashSet<>();
 
@@ -90,6 +93,11 @@ public class Store extends Audit {
 
         if (menus == null) {
             this.menus = new HashSet<>();
+        }
+
+        menu.setStore(this);
+        if (menus.contains(menu)) {
+            throw new DuplicateEntityException(ErrorCode.DUPLICATE_ENTITY);
         }
         this.menus.add(menu);
     }
