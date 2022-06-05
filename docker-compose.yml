@@ -1,0 +1,29 @@
+version:
+services:
+  db:
+    container_name:
+    image:
+    platform:
+    environment:
+      SPRING_PROFILES_ACTIVE:
+      MYSQL_DATABASE:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_HOST:
+    command:
+    ports:
+
+  application:
+    build: .
+    platform:
+    environment:
+      SPRING_PROFILES_ACTIVE:
+      SPRING_DATASOURCE_URL:
+      SPRING_DATASOURCE_USERNAME:
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME:
+      SPRING_DATASOURCE_PLATFORM:
+      SPRING_JPA_GENERATE_DDL:
+      SPRING_JPA_SHOW_SQL:
+      SPRING_JPA_DDL_AUTO:
+    ports:
+    depends_on:
