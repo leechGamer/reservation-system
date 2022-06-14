@@ -5,6 +5,9 @@ import com.reservation.reservationsystem.entity.reservation.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,9 +19,10 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer extends Audit {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "customer_id")
-    private Long id;
+    private String id;
 
     @Column(length = 10, nullable = false)
     private String name;
@@ -44,11 +48,13 @@ public class Customer extends Audit {
             String phoneNumber,
             String password
     ) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         return builder()
                 .name(name)
                 .email(email)
                 .phoneNumber(phoneNumber)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .build();
     }
 

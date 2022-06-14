@@ -1,29 +1,37 @@
-version:
+version: '3'
 services:
   db:
-    container_name:
-    image:
-    platform:
+    container_name: mysql
+    image: mysql
+    platform: linux/amd64
     environment:
-      SPRING_PROFILES_ACTIVE:
-      MYSQL_DATABASE:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_ROOT_HOST:
-    command:
+      SPRING_PROFILES_ACTIVE: local
+      MYSQL_DATABASE: reservation_system
+      MYSQL_ROOT_PASSWORD: mysql123
+      MYSQL_ROOT_HOST: root
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
     ports:
+      - "3306:3306"
 
   application:
-    build: .
-    platform:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/arm64/v8
     environment:
-      SPRING_PROFILES_ACTIVE:
-      SPRING_DATASOURCE_URL:
-      SPRING_DATASOURCE_USERNAME:
-      SPRING_DATASOURCE_PASSWORD:
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME:
-      SPRING_DATASOURCE_PLATFORM:
-      SPRING_JPA_GENERATE_DDL:
-      SPRING_JPA_SHOW_SQL:
-      SPRING_JPA_DDL_AUTO:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/reservation_system?useSSL=false&characterEncoding=UTF-8&serverTimeZone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: mysql123
+      SPRING_DATASOURCE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_GENERATE_DDL: true
+      SPRING_JPA_SHOW_SQL: true
+      SPRING_JPA_DDL_AUTO: update
     ports:
+      - "3000:3000"
+    restart: always
+    links:
+      - db
     depends_on:
+      - db
