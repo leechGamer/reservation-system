@@ -1,4 +1,4 @@
-package com.reservation.reservationsystem.service;
+package com.reservation.reservationsystem.service.store;
 
 import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.store.Store;

@@ -3,7 +3,7 @@ package com.reservation.reservationsystem.controller;
 import com.google.gson.Gson;
 import com.reservation.reservationsystem.dto.menu.MenuSaveRequestDTO;
 import com.reservation.reservationsystem.entity.menu.Menu;
-import com.reservation.reservationsystem.service.MenuService;
+import com.reservation.reservationsystem.service.menu.MenuService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

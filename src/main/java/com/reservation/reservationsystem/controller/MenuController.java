@@ -1,7 +1,7 @@
 package com.reservation.reservationsystem.controller;
 
 import com.reservation.reservationsystem.dto.menu.MenuSaveRequestDTO;
-import com.reservation.reservationsystem.service.MenuService;
+import com.reservation.reservationsystem.service.menu.MenuService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

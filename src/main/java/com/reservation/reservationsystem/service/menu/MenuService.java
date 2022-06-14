@@ -1,4 +1,4 @@
-package com.reservation.reservationsystem.service;
+package com.reservation.reservationsystem.service.menu;
 
 import com.reservation.reservationsystem.dto.menu.MenuSaveRequestDTO;
 import com.reservation.reservationsystem.entity.menu.Menu;
