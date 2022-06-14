@@ -8,7 +8,7 @@ import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.store.Address;
 import com.reservation.reservationsystem.entity.store.Location;
 import com.reservation.reservationsystem.entity.store.Store;
-import com.reservation.reservationsystem.service.StoreService;
+import com.reservation.reservationsystem.service.store.StoreService;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

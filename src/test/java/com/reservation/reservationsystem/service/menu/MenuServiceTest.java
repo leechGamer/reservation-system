@@ -11,7 +11,6 @@ import com.reservation.reservationsystem.entity.store.Store;
 import com.reservation.reservationsystem.exception.DuplicateEntityException;
 import com.reservation.reservationsystem.repository.menu.MenuRepository;
 import com.reservation.reservationsystem.repository.store.StoreRepository;
-import com.reservation.reservationsystem.service.MenuService;
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

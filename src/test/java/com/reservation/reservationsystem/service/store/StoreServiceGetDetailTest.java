@@ -8,7 +8,6 @@ import com.reservation.reservationsystem.entity.store.Location;
 import com.reservation.reservationsystem.entity.store.Store;
 import com.reservation.reservationsystem.exception.NotFoundEntityException;
 import com.reservation.reservationsystem.repository.store.StoreRepository;
-import com.reservation.reservationsystem.service.StoreService;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

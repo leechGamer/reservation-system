@@ -2,8 +2,7 @@ package com.reservation.reservationsystem.controller;
 
 import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.store.Store;
-import com.reservation.reservationsystem.exception.NotFoundEntityException;
-import com.reservation.reservationsystem.service.StoreService;
+import com.reservation.reservationsystem.service.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
