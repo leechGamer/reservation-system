@@ -33,7 +33,7 @@ public class Company extends Audit {
     private String phoneNumber;
 
     @OneToMany
-    @JoinColumn(name = "store_id", insertable=false, updatable = false)
+    @JoinColumn(name = "store_id", insertable = false, updatable = false)
     private Set<Store> stores = new HashSet<>();
 
     @Tolerate
