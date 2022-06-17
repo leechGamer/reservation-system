@@ -1,18 +1,18 @@
 package com.reservation.reservationsystem.controller;
 
+import com.reservation.reservationsystem.dto.store.StoreSaveDTO;
 import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.store.Store;
 import com.reservation.reservationsystem.service.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Set;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class StoreController {
 
@@ -28,5 +28,11 @@ public class StoreController {
     public ResponseEntity getMenu(@PathVariable(name = "storeId") Long storeId) {
         Set<Menu> menus = this.storeService.getMenu(storeId);
         return ResponseEntity.status(HttpStatus.OK).body(menus);
+    }
+
+    @PostMapping("/companies/{companyId}/stores")
+    public ResponseEntity save(@PathVariable(name = "companyId") Long companyId, @RequestBody @Valid StoreSaveDTO storeSaveDTO) {
+        this.storeService.save(companyId, storeSaveDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
