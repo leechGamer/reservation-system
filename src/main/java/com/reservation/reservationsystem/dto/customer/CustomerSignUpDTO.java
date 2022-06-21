@@ -24,6 +24,9 @@ public class CustomerSignUpDTO {
     @NotEmpty
     private String password;
 
+    @NotEmpty
+    private String userRole;
+
     @Tolerate
     CustomerSignUpDTO() {}
 
@@ -32,15 +35,17 @@ public class CustomerSignUpDTO {
             String name,
             String email,
             String phoneNumber,
-            String password
+            String password,
+            String userRole
     ) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.userRole = userRole;
     }
 
     public Customer toEntity() {
-        return Customer.of(name, email, phoneNumber, password);
+        return Customer.of(name, email, phoneNumber, password, userRole);
     }
 }

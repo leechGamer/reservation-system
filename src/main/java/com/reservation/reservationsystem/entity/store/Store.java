@@ -1,6 +1,7 @@
 package com.reservation.reservationsystem.entity.store;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.menu.Menu;
@@ -36,6 +37,7 @@ public class Store extends Audit {
 
     @ManyToOne(targetEntity = Company.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = false, name = "company_id")
+    @JsonIgnore
     private Company company;
 
     @Enumerated(EnumType.STRING)

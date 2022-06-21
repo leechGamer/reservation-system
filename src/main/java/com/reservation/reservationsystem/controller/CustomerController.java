@@ -6,6 +6,7 @@ import com.reservation.reservationsystem.dto.customer.CustomerSignUpDTO;
 import com.reservation.reservationsystem.entity.customer.Customer;
 import com.reservation.reservationsystem.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,18 +30,7 @@ public class CustomerController {
 
     @PostMapping("/signup")
     public ResponseEntity register(@RequestBody @Valid CustomerSignUpDTO customerDTO) {
-        Customer customer = this.customerService.create(customerDTO);
-        return ResponseEntity.ok().body(customer);
-    }
-
-    @PostMapping("/signin")
-    public ResponseEntity login(@RequestBody @Valid CustomerSignInDTO customerDTO) {
-        final String email = customerDTO.getEmail();
-        final String password = customerDTO.getPassword();
-
-        Customer customer = this.customerService.getByCredentials(email, password);
-
-        final String token = tokenProvider.create(customer);
-        return ResponseEntity.ok().body(token);
+        this.customerService.create(customerDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
