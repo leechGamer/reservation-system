@@ -5,7 +5,6 @@ import com.reservation.reservationsystem.entity.reservation.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -13,21 +12,23 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
 @Getter
 @Builder
 @Table(name = "customer")
 public class Customer extends Audit {
+
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue
     @Column(name = "customer_id")
-    private String id;
+    private Long id;
 
     @Column(length = 10, nullable = false)
     private String name;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 50, nullable = false)
     private String email;
 
     @Column(length = 11, nullable = false)
@@ -35,6 +36,10 @@ public class Customer extends Audit {
 
     @Column(length = 65, nullable = false)
     private String password;
+
+    @Column(length = 15, nullable = false)
+    @Enumerated(STRING)
+    private UserRoleType role;
 
     @OneToMany(mappedBy = "customer")
     private List<Reservation> reservations = new ArrayList<Reservation>();
@@ -46,7 +51,8 @@ public class Customer extends Audit {
             String name,
             String email,
             String phoneNumber,
-            String password
+            String password,
+            String userRole
     ) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -55,6 +61,7 @@ public class Customer extends Audit {
                 .email(email)
                 .phoneNumber(phoneNumber)
                 .password(passwordEncoder.encode(password))
+                .role(UserRoleType.valueOf(userRole))
                 .build();
     }
 

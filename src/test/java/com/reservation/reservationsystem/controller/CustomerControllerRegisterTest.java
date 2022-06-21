@@ -3,6 +3,7 @@ package com.reservation.reservationsystem.controller;
 import com.google.gson.Gson;
 import com.reservation.reservationsystem.dto.customer.CustomerSignUpDTO;
 import com.reservation.reservationsystem.entity.customer.Customer;
+import com.reservation.reservationsystem.entity.customer.UserRoleType;
 import com.reservation.reservationsystem.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,8 +54,9 @@ public class CustomerControllerRegisterTest {
                 .email(email)
                 .phoneNumber(phoneNumber)
                 .password(password)
+                .userRole(UserRoleType.BUSINESS.toString())
                 .build();
-        customer = Customer.of(name, email, phoneNumber, password);
+        customer = Customer.of(name, email, phoneNumber, password, UserRoleType.BUSINESS.toString());
     }
 
     @Test

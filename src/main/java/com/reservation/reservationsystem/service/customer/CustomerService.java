@@ -2,18 +2,20 @@ package com.reservation.reservationsystem.service.customer;
 
 import com.reservation.reservationsystem.dto.customer.CustomerSignUpDTO;
 import com.reservation.reservationsystem.entity.customer.Customer;
-import com.reservation.reservationsystem.exception.AuthenticationException;
 import com.reservation.reservationsystem.exception.DuplicateEntityException;
 import com.reservation.reservationsystem.exception.ErrorCode;
 import com.reservation.reservationsystem.repository.customer.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerService {
+public class CustomerService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
 
@@ -29,12 +31,15 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer getByCredentials(final String email, final String password) throws AuthenticationException {
-        Customer customer = customerRepository.findByEmail(email)
-                //.filter(c -> encoder.matches(password, c.getPassword()))
-                .orElseThrow(
-                        () -> new AuthenticationException(ErrorCode.UNAUTHORIZED)
-                );
-        return customer;
+    @Override
+    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+        Customer customer = customerRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException(ErrorCode.EMAIL_NOT_FOUND.getMessage())
+        );
+        return User.builder()
+                .username(customer.getEmail())
+                .password(customer.getPassword())
+                .roles(customer.getRole().toString())
+                .build();
     }
 }

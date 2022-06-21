@@ -8,6 +8,7 @@ import com.reservation.reservationsystem.entity.contstants.PaymentType;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
 import com.reservation.reservationsystem.entity.contstants.StoreCategory;
 import com.reservation.reservationsystem.entity.customer.Customer;
+import com.reservation.reservationsystem.entity.customer.UserRoleType;
 import com.reservation.reservationsystem.entity.reservation.Reservation;
 import com.reservation.reservationsystem.entity.store.Address;
 import com.reservation.reservationsystem.entity.store.Location;
@@ -82,7 +83,8 @@ class ReservationRepositoryImplTest {
                 "lee",
                 "lee@naver.com",
                 "01021112222",
-                new BCryptPasswordEncoder().encode("1234")
+                new BCryptPasswordEncoder().encode("1234"),
+                UserRoleType.NORMAL.toString()
         );
         em.persist(customer);
 
