@@ -2,11 +2,15 @@ package com.reservation.reservationsystem.service.reservation;
 
 import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequest;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
+import com.reservation.reservationsystem.entity.customer.Customer;
 import com.reservation.reservationsystem.entity.reservation.Reservation;
 import com.reservation.reservationsystem.exception.ErrorCode;
 import com.reservation.reservationsystem.exception.ReservationException;
+import com.reservation.reservationsystem.repository.customer.CustomerRepository;
 import com.reservation.reservationsystem.repository.reservation.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +27,8 @@ public class ReservationService {
     final static int AVAILABLE_CANCEL_HOUR = 5;
 
     final private ReservationRepository reservationRepository;
+
+    final private CustomerRepository customerRepository;
 
     public List<Reservation> search(Long storeId, ReservationSearchRequest requestDTO) {
         List<Reservation> reservations = reservationRepository.search(storeId, requestDTO);
@@ -44,6 +50,14 @@ public class ReservationService {
                             throw new ReservationException(ErrorCode.NOT_POSSIBLE_CANCEL_RESERVATION);
                         }
                 );
+    }
+
+    public List<Reservation> getList(User user) {
+        String email = user.getUsername();
+        Customer customer = customerRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException(ErrorCode.EMAIL_NOT_FOUND.getMessage())
+        );
+        return customer.getReservations();
     }
 
     private boolean checkAvailableTime(Reservation reservation) {

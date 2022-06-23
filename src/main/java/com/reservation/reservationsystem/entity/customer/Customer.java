@@ -1,5 +1,7 @@
 package com.reservation.reservationsystem.entity.customer;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.reservation.Reservation;
 import lombok.Builder;
@@ -9,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +20,9 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @Getter
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 @Table(name = "customer")
-public class Customer extends Audit {
+public class Customer extends Audit implements Serializable {
 
     @Id
     @GeneratedValue

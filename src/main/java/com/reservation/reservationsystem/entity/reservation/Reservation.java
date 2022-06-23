@@ -1,7 +1,9 @@
 package com.reservation.reservationsystem.entity.reservation;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.reservation.reservationsystem.entity.Audit;
-import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.PaymentStatus;
 import com.reservation.reservationsystem.entity.contstants.PaymentType;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
@@ -13,6 +15,7 @@ import lombok.Setter;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -22,8 +25,9 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @Getter
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 @Table(name = "reservation")
-public class Reservation extends Audit {
+public class Reservation extends Audit implements Serializable {
 
     @Id
     @GeneratedValue
@@ -31,6 +35,7 @@ public class Reservation extends Audit {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Customer customer;
 
