@@ -46,6 +46,15 @@ public class ReservationService {
                 );
     }
 
+    public Reservation getDetail(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(
+                () -> {
+                    throw new ReservationException(ErrorCode.NOT_FOUND_ENTITY);
+                }
+        );
+        return reservation;
+    }
+
     private boolean checkAvailableTime(Reservation reservation) {
         LocalDate date = reservation.getReservedDate();
         LocalTime time = reservation.getReservedTime();

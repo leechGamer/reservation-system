@@ -41,4 +41,10 @@ public class ReservationController {
             reservationService.cancel(reservationId);
             return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/reservations/{reservationId}")
+    public ResponseEntity getDetail(@PathVariable(name = "reservationId") Long reservationId) {
+        Reservation reservation = reservationService.getDetail(reservationId);
+        return ResponseEntity.status(HttpStatus.OK).body(reservation);
+    }
 }
