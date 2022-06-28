@@ -1,6 +1,6 @@
 package com.reservation.reservationsystem.controller;
 
-import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequest;
+import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequestDTO;
 import com.reservation.reservationsystem.entity.contstants.PaymentStatus;
 import com.reservation.reservationsystem.entity.contstants.PaymentType;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
@@ -52,9 +52,6 @@ class ReservationControllerTest {
         reservation = Reservation.of(
                 ReservationStatus.PENDING,
                 100000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 16),
                 LocalTime.of(13, 00, 00),
                 3
@@ -63,9 +60,6 @@ class ReservationControllerTest {
         reservation2 = Reservation.of(
                 ReservationStatus.PENDING,
                 30000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 10),
                 LocalTime.of(13, 00, 00),
                 5
@@ -79,7 +73,7 @@ class ReservationControllerTest {
     @Test
     public void test() throws Exception {
         // Given
-        ReservationSearchRequest request = ReservationSearchRequest.builder()
+        ReservationSearchRequestDTO request = ReservationSearchRequestDTO.builder()
                 .start(LocalDate.of(2022, 01, 03))
                 .end(LocalDate.of(2022, 02, 03))
                 .status(ReservationStatus.PENDING)
@@ -87,7 +81,7 @@ class ReservationControllerTest {
 
         long storeId = 4L;
 
-        given(service.search(anyLong(), any(ReservationSearchRequest.class))).willReturn(reservations);
+        given(service.search(anyLong(), any(ReservationSearchRequestDTO.class))).willReturn(reservations);
 
         // When & Then
         ResultActions result = mockMvc.perform(

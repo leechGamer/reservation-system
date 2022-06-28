@@ -1,7 +1,6 @@
 package com.reservation.reservationsystem.entity.company;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.store.Store;
 import lombok.Builder;
@@ -9,15 +8,15 @@ import lombok.Getter;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Getter
 @Builder
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Table(name = "company")
-public class Company extends Audit {
+public class Company extends Audit implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "company_id")
@@ -33,6 +32,7 @@ public class Company extends Audit {
     private String phoneNumber;
 
     @OneToMany
+    @JsonManagedReference
     @JoinColumn(name = "store_id", insertable = false, updatable = false)
     private Set<Store> stores = new HashSet<>();
 

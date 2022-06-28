@@ -1,6 +1,7 @@
 package com.reservation.reservationsystem.controller;
 
-import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequest;
+import com.reservation.reservationsystem.dto.reservation.ReservationRequestDTO;
+import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequestDTO;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
 import com.reservation.reservationsystem.entity.reservation.Reservation;
 import com.reservation.reservationsystem.service.reservation.ReservationService;
@@ -11,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class ReservationController {
             @RequestParam(name = "start", required = false) LocalDate start,
             @RequestParam(name = "end", required = false) LocalDate end
     ) {
-        ReservationSearchRequest request = ReservationSearchRequest.builder()
+        ReservationSearchRequestDTO request = ReservationSearchRequestDTO.builder()
                 .status(status)
                 .start(start)
                 .end(end)
@@ -48,5 +50,11 @@ public class ReservationController {
     public ResponseEntity getList(@AuthenticationPrincipal User user) {
         List<Reservation> reservations = reservationService.getList(user);
         return ResponseEntity.status(HttpStatus.OK).body(reservations);
+    }
+
+    @PostMapping("/reservations")
+    public ResponseEntity reserve(@AuthenticationPrincipal User user, @RequestBody @Valid ReservationRequestDTO request) {
+        Reservation reservation = reservationService.reserve(user, request);
+        return ResponseEntity.status(HttpStatus.OK).body(reservation);
     }
 }

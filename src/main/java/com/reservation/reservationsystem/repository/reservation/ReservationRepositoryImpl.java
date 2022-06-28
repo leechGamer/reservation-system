@@ -2,7 +2,7 @@ package com.reservation.reservationsystem.repository.reservation;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequest;
+import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequestDTO;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
 import com.reservation.reservationsystem.entity.reservation.Reservation;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<Reservation> search(Long storeId, ReservationSearchRequest request) {
+    public List<Reservation> search(Long storeId, ReservationSearchRequestDTO request) {
 
         BooleanBuilder builder = new BooleanBuilder();
 

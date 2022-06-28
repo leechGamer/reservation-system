@@ -61,9 +61,6 @@ class ReservationControllerCancelTest {
         reservation = Reservation.of(
                 ReservationStatus.PENDING,
                 100000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 16),
                 LocalTime.of(13, 00, 00),
                 3
@@ -73,9 +70,6 @@ class ReservationControllerCancelTest {
         reservation2 = Reservation.of(
                 ReservationStatus.CANCELED,
                 100000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 16),
                 LocalTime.of(13, 00, 00),
                 3

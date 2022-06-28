@@ -3,8 +3,6 @@ package com.reservation.reservationsystem.service.reservation;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.reservation.reservationsystem.config.QuerydslConfiguration;
 import com.reservation.reservationsystem.entity.company.Company;
-import com.reservation.reservationsystem.entity.contstants.PaymentStatus;
-import com.reservation.reservationsystem.entity.contstants.PaymentType;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
 import com.reservation.reservationsystem.entity.contstants.StoreCategory;
 import com.reservation.reservationsystem.entity.customer.Customer;
@@ -98,9 +96,6 @@ class ReservationServiceCancelTest {
         reservation = Reservation.of(
                 ReservationStatus.PENDING,
                 100000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.now().plusDays(1),
                 LocalTime.now(),
                 3
@@ -111,9 +106,6 @@ class ReservationServiceCancelTest {
         reservation2 = Reservation.of(
                 ReservationStatus.PENDING,
                 100000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.now(),
                 LocalTime.now(),
                 3

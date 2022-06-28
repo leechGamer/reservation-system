@@ -1,8 +1,6 @@
 package com.reservation.reservationsystem.entity.reservation;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.contstants.PaymentStatus;
 import com.reservation.reservationsystem.entity.contstants.PaymentType;
@@ -25,7 +23,6 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @Getter
 @Builder
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 @Table(name = "reservation")
 public class Reservation extends Audit implements Serializable {
 
@@ -35,30 +32,31 @@ public class Reservation extends Audit implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    @JsonBackReference
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "store_id")
     private Store store;
 
     @Setter
     @Enumerated(STRING)
     @Column(length = 40, nullable = false)
-    private ReservationStatus reservationStatus; // todo:: default type 지정할 것
+    private ReservationStatus reservationStatus = ReservationStatus.PENDING;
 
-    @Column(length = 10, nullable = false)
-    private Long amount;
-
-    @Setter
-    @Enumerated(STRING)
-    @Column(length = 40, nullable = false)
-    private PaymentStatus paymentStatus;
+    @Column(length = 10, nullable = true)
+    private Long amount = 0L;
 
     @Setter
     @Enumerated(STRING)
-    @Column(length = 40, nullable = false)
+    @Column(length = 40, nullable = true)
+    private PaymentStatus paymentStatus = PaymentStatus.READY;
+
+    @Setter
+    @Enumerated(STRING)
+    @Column(length = 40, nullable = true)
     private PaymentType paymentType = PaymentType.NONE;
 
     @Setter
@@ -72,7 +70,7 @@ public class Reservation extends Audit implements Serializable {
     private LocalTime reservedTime;
 
     @Column(nullable = false)
-    private int numberOfCustomer = 1 ;
+    private int numberOfCustomer = 1;
 
     @OneToOne
     @JoinColumn(name = "review_id", nullable = true, insertable = false, updatable = false)
@@ -84,9 +82,6 @@ public class Reservation extends Audit implements Serializable {
     public static Reservation of(
             ReservationStatus reservationStatus,
             long amount,
-            PaymentStatus paymentStatus,
-            PaymentType paymentType,
-            LocalDateTime paymentDate,
             LocalDate reservedDate,
             LocalTime reservedTime,
             int numberOfCustomer
@@ -94,9 +89,6 @@ public class Reservation extends Audit implements Serializable {
         return builder()
                 .reservationStatus(reservationStatus)
                 .amount(amount)
-                .paymentStatus(paymentStatus)
-                .paymentType(paymentType)
-                .paymentDate(paymentDate)
                 .reservedDate(reservedDate)
                 .reservedTime(reservedTime)
                 .numberOfCustomer(numberOfCustomer)
@@ -108,6 +100,7 @@ public class Reservation extends Audit implements Serializable {
             throw new EntityExistsException();
         }
         this.customer = customer;
+        customer.addReservation(this);
     }
 
     public void setStore(Store store) {
