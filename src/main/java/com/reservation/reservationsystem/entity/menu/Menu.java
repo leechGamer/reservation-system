@@ -1,5 +1,6 @@
 package com.reservation.reservationsystem.entity.menu;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.contstants.CategoryType;
 import com.reservation.reservationsystem.entity.store.Store;
@@ -8,13 +9,14 @@ import lombok.Getter;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Table(name = "menu")
 @Builder
-public class Menu extends Audit {
+public class Menu extends Audit implements Serializable {
 
     @Id
     @GeneratedValue
@@ -25,6 +27,7 @@ public class Menu extends Audit {
     private String name;
 
     @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
     private CategoryType category;
 
     @Column(nullable = true)
@@ -33,6 +36,7 @@ public class Menu extends Audit {
     @Column(nullable = false)
     private Long amount;
 
+    @JsonBackReference
     @ManyToOne
     private Store store;
 

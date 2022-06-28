@@ -1,7 +1,7 @@
 package com.reservation.reservationsystem.repository.reservation;
 
 import com.reservation.reservationsystem.config.QuerydslConfiguration;
-import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequest;
+import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequestDTO;
 import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.PaymentStatus;
 import com.reservation.reservationsystem.entity.contstants.PaymentType;
@@ -91,9 +91,6 @@ class ReservationRepositoryImplTest {
         r = Reservation.of(
                 ReservationStatus.PENDING,
                 0,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 05),
                 LocalTime.of(13, 00),
                 2
@@ -102,9 +99,6 @@ class ReservationRepositoryImplTest {
         r2 = Reservation.of(
                 ReservationStatus.PENDING,
                 10000,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 15),
                 LocalTime.of(14, 00),
                 2
@@ -113,9 +107,6 @@ class ReservationRepositoryImplTest {
         r3 = Reservation.of(
                 ReservationStatus.EXPIRED,
                 10000,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 02, 25),
                 LocalTime.of(14, 00),
                 2
@@ -124,9 +115,6 @@ class ReservationRepositoryImplTest {
         r4 = Reservation.of(
                 ReservationStatus.CANCELED,
                 10000,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 03, 05),
                 LocalTime.of(14, 00),
                 2
@@ -162,7 +150,7 @@ class ReservationRepositoryImplTest {
     @DisplayName("reservation 조회 : 예약상태 & 날짜")
     public void test() {
         // Given
-        ReservationSearchRequest request = ReservationSearchRequest.builder()
+        ReservationSearchRequestDTO request = ReservationSearchRequestDTO.builder()
                 .status(ReservationStatus.PENDING)
                 .start(LocalDate.of(2022, 01, 04))
                 .end(LocalDate.of(2022, 03, 30))
@@ -188,7 +176,7 @@ class ReservationRepositoryImplTest {
     @DisplayName("reservation 조회: 날짜")
     public void testWithStatusIsNull() {
         // Given
-        ReservationSearchRequest request = ReservationSearchRequest.builder()
+        ReservationSearchRequestDTO request = ReservationSearchRequestDTO.builder()
                 .start(LocalDate.of(2022, 02, 25))
                 .end(LocalDate.of(2022, 03, 30))
                 .build();
@@ -213,7 +201,7 @@ class ReservationRepositoryImplTest {
     @DisplayName("reservation 조회: 예약 상태로 예약건들을 조회할 수 있다.")
     public void testWithDateIsNull() {
         // Given
-        ReservationSearchRequest request = ReservationSearchRequest.builder()
+        ReservationSearchRequestDTO request = ReservationSearchRequestDTO.builder()
                 .status(ReservationStatus.PENDING)
                 .build();
 

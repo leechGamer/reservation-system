@@ -1,7 +1,6 @@
 package com.reservation.reservationsystem.entity.customer;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reservation.reservationsystem.entity.Audit;
 import com.reservation.reservationsystem.entity.reservation.Reservation;
 import lombok.Builder;
@@ -20,7 +19,6 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @Getter
 @Builder
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 @Table(name = "customer")
 public class Customer extends Audit implements Serializable {
 
@@ -46,6 +44,7 @@ public class Customer extends Audit implements Serializable {
     private UserRoleType role;
 
     @OneToMany(mappedBy = "customer")
+    @JsonManagedReference
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
     @Tolerate

@@ -1,7 +1,7 @@
 package com.reservation.reservationsystem.service.reservation;
 
 import com.reservation.reservationsystem.config.QuerydslConfiguration;
-import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequest;
+import com.reservation.reservationsystem.dto.reservation.ReservationSearchRequestDTO;
 import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.PaymentStatus;
 import com.reservation.reservationsystem.entity.contstants.PaymentType;
@@ -96,9 +96,6 @@ class ReservationServiceSearchTest {
         reservation = Reservation.of(
                 ReservationStatus.PENDING,
                 100000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 16),
                 LocalTime.of(13, 00, 00),
                 3
@@ -107,9 +104,6 @@ class ReservationServiceSearchTest {
         reservation2 = Reservation.of(
                 ReservationStatus.PENDING,
                 100000L,
-                PaymentStatus.READY,
-                PaymentType.NONE,
-                null,
                 LocalDate.of(2022, 01, 10),
                 LocalTime.of(13, 00, 00),
                 3
@@ -129,7 +123,7 @@ class ReservationServiceSearchTest {
     @DisplayName("reservation 조회")
     public void test() {
         // Given
-        ReservationSearchRequest request = new ReservationSearchRequest(
+        ReservationSearchRequestDTO request = new ReservationSearchRequestDTO(
                 ReservationStatus.PENDING,
                 LocalDate.of(2022, 01, 03),
                 LocalDate.of(2022, 02, 03)

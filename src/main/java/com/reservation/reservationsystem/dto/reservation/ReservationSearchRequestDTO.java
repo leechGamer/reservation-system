@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Getter
 @Builder
-public class ReservationSearchRequest {
+public class ReservationSearchRequestDTO {
 
     private ReservationStatus status;
 
@@ -21,10 +21,10 @@ public class ReservationSearchRequest {
     private LocalDate end;
 
     @Tolerate
-    ReservationSearchRequest() {}
+    ReservationSearchRequestDTO() {}
 
     @Builder
-    public ReservationSearchRequest(ReservationStatus status, LocalDate start, LocalDate end) {
+    public ReservationSearchRequestDTO(ReservationStatus status, LocalDate start, LocalDate end) {
         this.status = status;
         this.start = start;
         this.end = end;

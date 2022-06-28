@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Boolean existsByEmail(String email);
     Optional<Customer> findByEmail(String email) throws AuthenticationException;
+    @Override
+    Customer getById(Long aLong);
 }

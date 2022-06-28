@@ -1,9 +1,7 @@
 package com.reservation.reservationsystem.controller;
 
 import com.reservation.reservationsystem.config.TokenProvider;
-import com.reservation.reservationsystem.dto.customer.CustomerSignInDTO;
 import com.reservation.reservationsystem.dto.customer.CustomerSignUpDTO;
-import com.reservation.reservationsystem.entity.customer.Customer;
 import com.reservation.reservationsystem.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

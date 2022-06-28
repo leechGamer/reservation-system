@@ -8,13 +8,15 @@ import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
+
 import static javax.persistence.EnumType.STRING;
 
 @Entity
 @Getter
 @Builder
 @Table(name = "review")
-public class Review extends Audit {
+public class Review extends Audit implements Serializable {
 
     @Id
     @GeneratedValue

@@ -1,12 +1,11 @@
 package com.reservation.reservationsystem.entity.store;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reservation.reservationsystem.entity.Audit;
-import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.company.Company;
 import com.reservation.reservationsystem.entity.contstants.StoreCategory;
+import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.exception.DuplicateEntityException;
 import com.reservation.reservationsystem.exception.ErrorCode;
 import lombok.Builder;
@@ -15,6 +14,7 @@ import lombok.Setter;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,9 +23,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Table(name = "store")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Builder
-public class Store extends Audit {
+public class Store extends Audit implements Serializable {
 
     @Id @GeneratedValue
     @Column(name = "store_id")
@@ -35,9 +34,9 @@ public class Store extends Audit {
     @Column(nullable = false)
     private String name;
 
+    @JsonBackReference
     @ManyToOne(targetEntity = Company.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = false, name = "company_id")
-    @JsonIgnore
     private Company company;
 
     @Enumerated(EnumType.STRING)
@@ -64,6 +63,7 @@ public class Store extends Audit {
     private List<OperationTime> operationTimes = new ArrayList<>();
 
     @OneToMany
+    @JsonManagedReference
     @JoinColumn(name = "menu_id")
     private Set<Menu> menus = new HashSet<>();
 
