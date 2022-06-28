@@ -7,6 +7,8 @@ import com.reservation.reservationsystem.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -40,5 +42,11 @@ public class ReservationController {
     public ResponseEntity cancel(@PathVariable(name = "reservationId") Long reservationId) {
             reservationService.cancel(reservationId);
             return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/reservations")
+    public ResponseEntity getList(@AuthenticationPrincipal User user) {
+        List<Reservation> reservations = reservationService.getList(user);
+        return ResponseEntity.status(HttpStatus.OK).body(reservations);
     }
 }
