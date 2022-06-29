@@ -64,7 +64,7 @@ public class Store extends Audit implements Serializable {
     private List<OperationTime> operationTimes = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany
+    @OneToMany(cascade={CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true)
     @JsonManagedReference
     @JoinColumn(name = "menu_id")
     private Set<Menu> menus = new HashSet<>();

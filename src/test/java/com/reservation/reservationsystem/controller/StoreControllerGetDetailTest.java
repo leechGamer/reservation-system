@@ -71,7 +71,6 @@ class StoreControllerGetDetailTest {
         );
         company.addStore(store);
         em.persist(company);
-        em.persist(store);
     }
 
     @Test

@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.willThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -62,7 +62,9 @@ class StoreControllerGetMenuTest {
 
     @BeforeEach
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(storeController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(storeController)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         company = Company.of(
                 "1234567890",
@@ -92,8 +94,8 @@ class StoreControllerGetMenuTest {
                 17500L
         );
 
-        store.setCompany(company);
-        em.persist(store);
+        company.addStore(store);
+        em.persist(company);
 
         store.addMenu(menu);
         store.addMenu(menu2);
@@ -123,12 +125,13 @@ class StoreControllerGetMenuTest {
         // Given
         long storeId = 3L;
 
-        when(storeService.getDetail(storeId)).thenThrow(new NotFoundEntityException(ErrorCode.NOT_FOUND_ENTITY));
+        willThrow(new NotFoundEntityException(ErrorCode.NOT_FOUND_ENTITY))
+                .given(storeService).getMenu(storeId);
 
         // When & Then
         mockMvc.perform(
-                get("/stores/{storeId}/menus", storeId)
+                get("/stores/{storeId}/menu", storeId)
                         .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().is4xxClientError());
+        ).andExpect(status().isBadRequest());
     }
 }
