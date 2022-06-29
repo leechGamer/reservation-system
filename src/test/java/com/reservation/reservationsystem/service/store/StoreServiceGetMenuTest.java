@@ -31,7 +31,7 @@ import java.util.Set;
 
 import static org.mockito.BDDMockito.given;
 
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(QuerydslConfiguration.class)

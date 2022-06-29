@@ -58,10 +58,12 @@ public class Store extends Audit implements Serializable {
     @Column(nullable = false, name="phone_number")
     private String phoneNumber;
 
+    @Builder.Default
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "operation_time_id")
     private List<OperationTime> operationTimes = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany
     @JsonManagedReference
     @JoinColumn(name = "menu_id")

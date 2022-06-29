@@ -31,7 +31,8 @@ public class Company extends Audit implements Serializable {
     @Column(length = 11, nullable = false)
     private String phoneNumber;
 
-    @OneToMany
+    @Builder.Default
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     @JoinColumn(name = "store_id", insertable = false, updatable = false)
     private Set<Store> stores = new HashSet<>();

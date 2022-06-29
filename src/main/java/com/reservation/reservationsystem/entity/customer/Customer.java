@@ -43,6 +43,7 @@ public class Customer extends Audit implements Serializable {
     @Enumerated(STRING)
     private UserRoleType role;
 
+    @Builder.Default
     @OneToMany(mappedBy = "customer")
     @JsonManagedReference
     private List<Reservation> reservations = new ArrayList<Reservation>();

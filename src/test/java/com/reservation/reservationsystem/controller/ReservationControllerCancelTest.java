@@ -1,8 +1,6 @@
 package com.reservation.reservationsystem.controller;
 
 import com.reservation.reservationsystem.config.QuerydslConfiguration;
-import com.reservation.reservationsystem.entity.contstants.PaymentStatus;
-import com.reservation.reservationsystem.entity.contstants.PaymentType;
 import com.reservation.reservationsystem.entity.contstants.ReservationStatus;
 import com.reservation.reservationsystem.entity.reservation.Reservation;
 import com.reservation.reservationsystem.exception.ErrorCode;
@@ -32,7 +30,7 @@ import static org.mockito.BDDMockito.willThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(QuerydslConfiguration.class)

@@ -37,7 +37,7 @@ public class Menu extends Audit implements Serializable {
     private Long amount;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Store store;
 
     @Tolerate

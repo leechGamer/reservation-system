@@ -8,8 +8,9 @@ import com.reservation.reservationsystem.entity.menu.Menu;
 import com.reservation.reservationsystem.entity.store.Address;
 import com.reservation.reservationsystem.entity.store.Location;
 import com.reservation.reservationsystem.entity.store.Store;
+import com.reservation.reservationsystem.exception.ErrorCode;
+import com.reservation.reservationsystem.exception.NotFoundEntityException;
 import com.reservation.reservationsystem.service.store.StoreService;
-import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,17 +26,17 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.HashSet;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(QuerydslConfiguration.class)
@@ -91,8 +92,7 @@ class StoreControllerGetMenuTest {
                 17500L
         );
 
-        company.addStore(store);
-        em.persist(company);
+        store.setCompany(company);
         em.persist(store);
 
         store.addMenu(menu);
@@ -112,23 +112,22 @@ class StoreControllerGetMenuTest {
 
         // When & Then
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/stores/{storeId}/menu", store.getId())
+                get("/stores/{storeId}/menu", store.getId())
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk()).andDo(print());
     }
 
-    @DisplayName("store를 찾을 수 없을 때")
     @Test
-    public void testWithInvalidParam() throws Exception {
+    @DisplayName("store 정보가 없을 경우 exception 발생")
+    public void testWithException() throws Exception {
         // Given
-        Long storeId = 3L;
-        willThrow(new NotFoundException("가게를 찾을 수 없습니다."))
-                .given(storeService).getMenu(storeId);
+        long storeId = 3L;
 
+        when(storeService.getDetail(storeId)).thenThrow(new NotFoundEntityException(ErrorCode.NOT_FOUND_ENTITY));
 
         // When & Then
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/stores/{storeId}/menu", storeId)
+                get("/stores/{storeId}/menus", storeId)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().is4xxClientError());
     }
