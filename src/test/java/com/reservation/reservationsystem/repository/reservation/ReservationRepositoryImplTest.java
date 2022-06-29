@@ -31,7 +31,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest

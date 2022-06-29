@@ -44,19 +44,23 @@ public class Reservation extends Audit implements Serializable {
     @Setter
     @Enumerated(STRING)
     @Column(length = 40, nullable = false)
+    @Builder.Default
     private ReservationStatus reservationStatus = ReservationStatus.PENDING;
 
+    @Builder.Default
     @Column(length = 10, nullable = true)
     private Long amount = 0L;
 
     @Setter
     @Enumerated(STRING)
     @Column(length = 40, nullable = true)
+    @Builder.Default
     private PaymentStatus paymentStatus = PaymentStatus.READY;
 
     @Setter
     @Enumerated(STRING)
     @Column(length = 40, nullable = true)
+    @Builder.Default
     private PaymentType paymentType = PaymentType.NONE;
 
     @Setter
@@ -69,6 +73,7 @@ public class Reservation extends Audit implements Serializable {
     @Column(nullable = false)
     private LocalTime reservedTime;
 
+    @Builder.Default
     @Column(nullable = false)
     private int numberOfCustomer = 1;
 

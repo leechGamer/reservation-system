@@ -3,6 +3,7 @@ package com.reservation.reservationsystem.service.customer;
 import com.reservation.reservationsystem.config.QuerydslConfiguration;
 import com.reservation.reservationsystem.dto.customer.CustomerSignUpDTO;
 import com.reservation.reservationsystem.entity.customer.Customer;
+import com.reservation.reservationsystem.entity.customer.UserRoleType;
 import com.reservation.reservationsystem.repository.customer.CustomerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(QuerydslConfiguration.class)
@@ -59,6 +60,7 @@ class CustomerServiceTest {
                 .email(email)
                 .phoneNumber(phoneNumber)
                 .password(password)
+                .userRole(UserRoleType.NORMAL.toString())
                 .build();
     }
 
