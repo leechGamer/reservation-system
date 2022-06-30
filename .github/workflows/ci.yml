@@ -30,8 +30,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Build and Push Docker image
-      run: |
-        uses: mr-smithers-excellent/docker-build-push@v5
+      uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: nueola/reservation-system
         registry: docker.io
