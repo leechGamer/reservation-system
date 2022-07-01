@@ -6,7 +6,7 @@ services:
     platform: linux/amd64
     build: .
     environment:
-      SPRING_PROFILES_ACTIVE: test
+      SPRING_PROFILES_ACTIVE: local
       MYSQL_DATABASE: reservation_system_test
       MYSQL_ROOT_PASSWORD: mysql123
       MYSQL_ROOT_HOST: root
