@@ -22,6 +22,9 @@ jobs:
       - name: Close all Container
         run: docker system prune -a
 
+      - name: Build Gradle Without Test
+        run: gradle build --exclude-task test
+
       - name: Run Container
         run: docker-compose up --build -d
 
