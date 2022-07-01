@@ -7,7 +7,7 @@ services:
     build: .
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      MYSQL_DATABASE: reservation_system
+      MYSQL_DATABASE: reservation_system_test
       MYSQL_ROOT_PASSWORD: /run/secrets/SPRING_DATASOURCE_PASSWORD
       MYSQL_ROOT_HOST: /run/secrets/MYSQL_ROOT_HOST
     ports:
