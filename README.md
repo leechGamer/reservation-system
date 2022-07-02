@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/Java-11-orange?style=-the-badge&logo=Java&logoColor=white" alt="Java"/>
 
 ## Overview
-[WIP] 아직 작업 중인 프로젝트입니다. 
+[WIP]
 
 ## Server Architecture
 
