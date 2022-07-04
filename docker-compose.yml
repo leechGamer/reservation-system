@@ -6,10 +6,10 @@ services:
     platform: linux/amd64
     build: .
     environment:
-      SPRING_PROFILES_ACTIVE: prod
+      SPRING_PROFILES_ACTIVE: local
       MYSQL_DATABASE: reservation_system_test
-      MYSQL_ROOT_PASSWORD: /run/secrets/SPRING_DATASOURCE_PASSWORD
-      MYSQL_ROOT_HOST: /run/secrets/MYSQL_ROOT_HOST
+      MYSQL_ROOT_PASSWORD: mysql123
+      MYSQL_ROOT_HOST: root
     ports:
       - "3306:3306"
     volumes:
@@ -18,10 +18,10 @@ services:
   spring-app:
     build: .
     environment:
-      SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: /run/secrets/SPRING_DATASOURCE_URL
-      SPRING_DATASOURCE_USERNAME: /run/secrets/MYSQL_ROOT_HOST
-      SPRING_DATASOURCE_PASSWORD: /run/secrets/SPRING_DATASOURCE_PASSWORD
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/reservation_system_test?useSSL=false&characterEncoding=UTF-8&serverTimeZone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: mysql123
       SPRING_DATASOURCE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       SPRING_JPA_GENERATE_DDL: "true"
