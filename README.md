@@ -1,6 +1,8 @@
 # reservation-system
 <p align="left">
 <img src="https://img.shields.io/badge/spring_boot-v2.6.6-green?style=-the-badge&logo=springboot"  alt="spring-boot"/>
+<img src="https://img.shields.io/badge/jpa-blue?style=-the-badge"  alt="spring-boot"/>
+
   <img src="https://img.shields.io/badge/Java-11-orange?style=-the-badge&logo=Java&logoColor=white" alt="Java"/>
 
 ## Overview
