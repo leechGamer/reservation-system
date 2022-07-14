@@ -1,6 +1,6 @@
 use reservation_system_test;
 
-create table company
+create table if not exists company
 (
     company_id      bigint auto_increment
         primary key,
@@ -13,7 +13,7 @@ create table company
 )
     auto_increment = 23;
 
-create table customer
+create table if not exists customer
 (
     customer_id  bigint auto_increment
         primary key,
@@ -27,7 +27,7 @@ create table customer
     role         varchar(15) not null
 );
 
-create table review
+create table if not exists  review
 (
     review_id  bigint auto_increment
         primary key,
@@ -38,7 +38,7 @@ create table review
     score      varchar(255) not null
 );
 
-create table store
+create table if not exists  store
 (
     store_id     bigint auto_increment
         primary key,
@@ -61,7 +61,7 @@ create table store
 )
     auto_increment = 21;
 
-create table menu
+create table if not exists  menu
 (
     menu_id        bigint auto_increment
         primary key,
@@ -79,7 +79,7 @@ create table menu
         foreign key (menu_id) references store (store_id)
 );
 
-create table operation_time
+create table if not exists  operation_time
 (
     operation_time_id bigint auto_increment
         primary key,
@@ -95,7 +95,7 @@ create table operation_time
         foreign key (operation_time_id) references store (store_id)
 );
 
-create table reservation
+create table if not exists  reservation
 (
     reservation_id     bigint auto_increment
         primary key,
@@ -122,7 +122,7 @@ create table reservation
 )
     auto_increment = 5;
 
-create table reservation_menu
+create table if not exists  reservation_menu
 (
     reservation_menu_id bigint auto_increment
         primary key,
