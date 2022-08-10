@@ -16,8 +16,7 @@ docker run --name mysql8 -e MYSQL_DATABASE=reservation_system -e MYSQL_DATABASE=
 
 
 ## Server Architecture
-
-![Server Architecture](https://user-images.githubusercontent.com/24830023/177009623-9c149431-7aba-4a10-b8e7-fd70521acddb.png)
+![Server Architecture](https://user-images.githubusercontent.com/24830023/183935502-5f176b34-cf4d-494c-84b6-6fded120faa3.png)
 
 
 ## ERD
